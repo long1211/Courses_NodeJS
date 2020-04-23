@@ -1,0 +1,21 @@
+h1 BOOKS
+  h3 LIST
+    ul
+      each book in books
+        li
+          span=book.title
+          span (
+          span=book.description
+          span )
+          span &nbsp
+          a(href="/books/update/"+book.id) Update
+          spab &nbsp
+          a(href="/books/delete/"+book.id) Delete
+  h3 CREATE
+    form(action="/books/create",method="POST")
+      label(for="title") Title
+      input(type="text",name="title",id="title")
+      
+      label(for="description") Description
+      input(type="text",name="description",id="description")
+      button Create
