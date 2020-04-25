@@ -1,19 +1,97 @@
 {
   "books": [
     {
-      "title": "hỗ trợ học",
-      "description": "sgk day cac ban",
-      "id": "0fZKVvUmT"
+      "id": "1a",
+      "title": "Javascript",
+      "description": "Hello Javascript"
     },
     {
-      "title": "hello world",
-      "description": "abc",
-      "id": "59jJhnDix"
+      "id": "2a",
+      "title": "HTML",
+      "description": "Hello HTML"
     },
     {
-      "title": "sadasdasd",
-      "description": "cde",
-      "id": "mI206ZsKM"
+      "id": "3a",
+      "title": "CSS",
+      "description": "Hello CSS"
+    },
+    {
+      "id": "4a",
+      "title": "React",
+      "description": "Hello React"
+    },
+    {
+      "title": "ExpressJS",
+      "description": "Backend pro :3",
+      "id": "YFSxM_ww6"
+    },
+    {
+      "title": "ES6",
+      "description": "javascript advance",
+      "id": "AbwgOni6C"
+    }
+  ],
+  "users": [
+    {
+      "id": "1b",
+      "name": "Thanh",
+      "phone": "111",
+      "email": "thanh@gmail.com",
+      "password": "4297f44b13955235245b2497399d7a93",
+      "isAdmin": true,
+      "wrongLoginCount": 4
+    },
+    {
+      "id": "2b",
+      "name": "Liu",
+      "phone": "222",
+      "email": "liu@gmail.com",
+      "password": "4297f44b13955235245b2497399d7a93",
+      "isAdmin": false,
+      "wrongLoginCount": 4
+    },
+    {
+      "id": "3b",
+      "name": "Thinh",
+      "phone": "333",
+      "email": "thinh@gmail.com",
+      "password": "4297f44b13955235245b2497399d7a93",
+      "isAdmin": false
+    },
+    {
+      "id": "5b",
+      "name": "Choe",
+      "password": "$2b$10$QxkAOHydHwkejvWuPdlF3OWoAjP62Rh7cnAxKuj.LeNdioHpTAIOu",
+      "email": "choe@gmail.com",
+      "isAdmin": false,
+      "wrongLoginCount": null
+    },
+    {
+      "id": "admin1",
+      "name": "admin",
+      "password": "$2b$10$nDYu9FMIbPtbexwxLburT.9oZC1gmpC1T4nEl3Sxr7FdXUnsOlvhK",
+      "email": "admin@gmail.com",
+      "isAdmin": true,
+      "wrongLoginCount": 1
+    }
+  ],
+  "transactions": [
+    {
+      "bookId": "1a",
+      "userId": "1b",
+      "id": "1c",
+      "isComplete": false
+    },
+    {
+      "bookId": "2a",
+      "userId": "2b",
+      "id": "2c",
+      "isComplete": false
+    },
+    {
+      "userId": "3b",
+      "bookId": "3a",
+      "id": "timuT1PtF"
     }
   ]
 }

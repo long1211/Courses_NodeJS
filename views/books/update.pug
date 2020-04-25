@@ -1,6 +1,7 @@
-h1 UPDATE
-form(action="/books/update" method="POST")
-  input(type="hidden" name="id" value=id)
-  label(for="title") New Title
-  input(type="text" name="title" id="title")
-  button Submit
+extends ../layouts/common
+block content  
+  h2.mb-4  Update Title Book
+
+  form.form-group(action='/books/' + book.id + '/update' , method='POST')
+    input.form-control(type='text', name='title' value=book.title)
+    button.btn.btn-primary.mt-2(type='subtmit') Update

@@ -1,0 +1,9 @@
+extends ../layouts/common
+block content
+  h2.mb-4  Update User
+
+  form.form-group(action='/users/' + user.id + '/update' , method='POST')
+    input.form-control.mb-2(type='text', name='name' value=user.name)
+    input.form-control.mb-2(type='text', name='phone' value=user.phone)
+    button.btn.btn-primary(type='subtmit') Update
+
