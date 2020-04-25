@@ -1,0 +1,33 @@
+extends ../layouts/common
+block content
+  h2.mb-4.mt-4  Book List
+
+  if isAdmin
+    form(action='books/create' , method='POST')
+      .form-group
+        label(for='title') Title Book
+        input#title.form-control(type='text', name='title')
+      .form-group
+        label(for='description')  Description Book
+        input#description.form-control(type='text', name='description')
+      button.btn.btn-primary Create
+
+  table.table.table-hover
+    thead
+      tr
+        th Title
+        th Description
+        if isAdmin
+          th Actions
+    tbody
+      each book in books
+        tr
+          td #{book.title}
+          td #{book.description}
+          if isAdmin
+            td
+              a(href='/books/' + book.id + '/update')
+                button.btn.btn-primary Update
+              span 
+              a(href='/books/' + book.id + '/delete')
+                button.btn.btn-danger Delete

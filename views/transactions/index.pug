@@ -1,0 +1,38 @@
+extends ../layouts/common
+block content
+  h2.mb-4  Transaction
+
+  if isAdmin
+    form(method='POST')
+      .form-group
+        .mt-2
+          label User Name
+          select.browser-default.custom-select(name='userId')
+            each user in users
+              option( value=user.id) #{user.name}
+        .mt-2
+          label Book Title
+          select.browser-default.custom-select(name='bookId')
+            each book in books
+              option( value=book.id) #{book.title}
+      button.btn.btn-primary(type="submit") Create
+
+
+  table.table.table-hover
+    thead
+      tr 
+        th User Name
+        th Book Title
+        th Status
+    tbody
+      each transaction in transactions
+        tr
+          td #{transaction.userName}
+          td #{transaction.bookTitle}
+          td
+            span= transaction.isComplete ? "Đòi mãi mới trả" : "Có dấu hiệu ăn quỵt"
+            a.ml-4(href="/transactions/" + transaction.id +"/complete")
+              if isAdmin
+                button.btn.btn-primary Complete
+
+        

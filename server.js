@@ -1,68 +1,37 @@
-const express = require('express');
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
 
-const adapter = new FileSync('db.json')
-const db = low(adapter)
-const shortid = require('shortid');
-db.defaults({ books: [] })
-  .write()
+const userRoute = require("./routes/user.route")
+const bookRoute = require("./routes/book.route")
+const transactionRoute = require("./routes/transaction.route")
+const authRoute = require("./routes/auth.route")
+const authMiddleware = require("./middlewares/auth.middleware")
+
+
 const app = express();
-const bodyParser = require('body-parser')
-app.set('view engine', 'pug');
-app.set('views', './views');
-app.use(bodyParser.json()) // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true }))
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get('/', (request, response) => {
-  response.send('<a href="/books">books</a>');
+
+app.set("view engine", "pug");
+app.set("views", "./views");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser())
+
+app.use(express.static('public'));
+
+
+app.get("/", (request, response) => {
+  response.render("index");
 });
-app.get('/books', (request, response) => {
-response.render("index",{
-  books:db.get("books").value()
-})
-  
-  
-});
-app.get('/books/delete/:id', (request, response) => {
-  var id=request.params.id;
-  var book=db.get("books").find({id:id}).value()
-  db.get("books").remove(book).write()
-  response.redirect("/books")
-})
 
+app.use('/users', authMiddleware.requireAuth, userRoute)
+app.use('/books', authMiddleware.requireAuth, bookRoute)
+app.use('/transactions', transactionRoute)
+app.use('/auth',authRoute)
 
-app.get("/books/update/:id",(request, response) => {
-  var id = request.params.id
-         db.get('books')
-               .find({ id: id })
-               .write()
-  response.render("books/update", {
-    id: id
-  })
-  })
-  
-
-app.post("/books/update",(request, response) => {
-  
-  var id=request.body.id;
-  db.get("books")
-        .find({id:id})
-        .assign({title: request.body.title})
-        .write()
-  
-  response.redirect("/books")
-})
-       
-
-app.post("/books/create",(request, response) => {
-  request.body.id=shortid.generate();
-  db.get("books").push(request.body).write();
-  response.redirect("/books");
-})
-
-// listen for requests :)
-app.listen(process.env.PORT, () => {
-  console.log("Server listening on port " + process.env.PORT);
+// Run server
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
 });
